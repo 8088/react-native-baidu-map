@@ -24,7 +24,6 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
 - build.gradle `compile project(':react-native-baidu-map')`
 
 - MainApplication `new BaiduMapPackage(getApplicationContext())`
-- AndroidManifest.xml `<meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="xx"/>`
             
 - AndroidManifest.xml
 ```
@@ -37,6 +36,24 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
 <uses-permission android:name="android.permission.GET_TASKS" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+...
+<application
+    android:name=".MainApplication"
+    android:allowBackup="true"
+    android:label="@string/app_name"
+    android:icon="@mipmap/ic_launcher"
+    android:theme="@style/AppTheme">
+
+    <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="xxxxx"/>
+
+    <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:windowSoftInputMode="adjustResize">
+    ....
+
 ```
 
 
