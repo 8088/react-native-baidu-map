@@ -6,7 +6,7 @@ Baidu Map SDK modules and view for React Native(Android & IOS), support react na
 
 定位、搜索、截图..
 
-![preview](https://github.com/8088/react-native-baidu-map/tree/master/demo/preview.gif)
+![preview](https://github.com/8088/react-native-baidu-map/blob/master/demo/preview.gif)
 
 ### Install 安装
 ```
