@@ -81,7 +81,7 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
     }
   
 ### Usage 使用方法
-See [demo/app/index.js](https://github.com/8088/react-native-baidu-map/blob/master/demo/app/index.js) for a more detailed example. See the [Wiki](https://github.com/8088/react-native-baidu-map/wiki) usage tips.
+See [demo](https://github.com/8088/react-native-baidu-map/tree/master/demo) for a more detailed example. See the [Wiki](https://github.com/8088/react-native-baidu-map/wiki) usage tips.
 ```
 import { MapView, MapTypes, MapModule, Geolocation, PoiSearch } from 'react-native-baidu-map'
 ...
