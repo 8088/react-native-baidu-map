@@ -18,7 +18,8 @@ npm install react-native-baidu-map --save
 - settings.gradle
 ```
 include ':react-native-baidu-map'
-project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_modules/react-native-baidu-map/android')```
+project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_modules/react-native-baidu-map/android')
+```
 
 - build.gradle `compile project(':react-native-baidu-map')`
 
