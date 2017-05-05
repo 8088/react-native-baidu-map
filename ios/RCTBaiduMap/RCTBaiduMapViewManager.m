@@ -2,8 +2,8 @@
 //  RCTBaiduMapViewManager.m
 //  RCTBaiduMap
 //
-//  Created by lovebing on Aug 6, 2016.
-//  Copyright © 2016 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 #import "RCTBaiduMapViewManager.h"
@@ -130,6 +130,31 @@ didSelectAnnotationView:(BMKAnnotationView *)view {
                                     }
                             };
     [self sendEvent:mapView params:event];
+}
+
+
+//地图被拖动的时候，需要时时的渲染界面，当渲染结束的时候我们就去定位然后获取图片对应的经纬度
+- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+  NSLog(@"regionDidChangeAnimated");
+  
+  CGPoint touchPoint = [mapView convertCoordinate:mapView.centerCoordinate toPointToView:mapView];
+  CLLocationCoordinate2D touchMapCoordinate =
+  [mapView convertPoint:touchPoint toCoordinateFromView:mapView];//这里touchMapCoordinate就是该点的经纬度了
+  NSLog(@"touching %f,%f",touchMapCoordinate.latitude,touchMapCoordinate.longitude);
+  
+  NSDictionary* event = @{
+                          @"type": @"onRegionDidChangeAnimated",
+                          @"params": @{
+                              @"target": @{
+                                  @"latitude": @(touchMapCoordinate.latitude),
+                                  @"longitude": @(touchMapCoordinate.longitude)
+                                  },
+                              @"zoom": @"",
+                              @"overlook": @""
+                              }
+                          };
+
+  [self sendEvent:mapView params:event];
 }
 
 -(void)sendEvent:(RCTBaiduMapView *) mapView params:(NSDictionary *) params {

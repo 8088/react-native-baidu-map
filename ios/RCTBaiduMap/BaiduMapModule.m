@@ -2,8 +2,8 @@
 //  BaiduMapModule.m
 //  RCTBaiduMap
 //
-//  Created by lovebing on 4/17/2016.
-//  Copyright © 2016 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 

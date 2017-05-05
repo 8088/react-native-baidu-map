@@ -2,16 +2,16 @@
 //  RCTBaiduMap.h
 //  RCTBaiduMap
 //
-//  Created by lovebing on 4/17/2016.
-//  Copyright © 2016 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 #ifndef RCTBaiduMapView_h
 #define RCTBaiduMapView_h
 
 
-#import "RCTViewManager.h"
-#import "RCTConvert+CoreLocation.h"
+#import <React/RCTViewManager.h>
+#import <React/RCTConvert+CoreLocation.h>
 #import <BaiduMapAPI_Map/BMKMapView.h>
 #import <BaiduMapAPI_Map/BMKPinAnnotationView.h>
 #import <BaiduMapAPI_Map/BMKPointAnnotation.h>

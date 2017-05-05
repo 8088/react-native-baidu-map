@@ -7,6 +7,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -18,11 +19,13 @@ import com.baidu.mapapi.utils.CoordinateConverter;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableNativeMap;
 
-/**
- * Created by lovebing on 2016/10/28.
- */
+import java.util.List;
+
 public class GeolocationModule extends BaseModule
         implements BDLocationListener, OnGetGeoCoderResultListener {
 
@@ -41,11 +44,11 @@ public class GeolocationModule extends BaseModule
 
     private void initLocationClient() {
         LocationClientOption option = new LocationClientOption();
-        option.setCoorType("bd09ll");
+        option.setCoorType("bd09ll"); //返回百度经纬度坐标系
         option.setIsNeedAddress(true);
         option.setIsNeedAltitude(true);
         option.setIsNeedLocationDescribe(true);
-        option.setOpenGps(true);
+        option.setOpenGps(true); //设置是否打开gps进行定位
         locationClient = new LocationClient(context.getApplicationContext());
         locationClient.setLocOption(option);
         Log.i("locationClient", "locationClient");
@@ -129,6 +132,11 @@ public class GeolocationModule extends BaseModule
     }
 
     @Override
+    public void onConnectHotSpotMessage(String s, int i) {
+
+    }
+
+    @Override
     public void onGetGeoCodeResult(GeoCodeResult result) {
         WritableMap params = Arguments.createMap();
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -155,6 +163,30 @@ public class GeolocationModule extends BaseModule
             params.putString("district", addressComponent.district);
             params.putString("street", addressComponent.street);
             params.putString("streetNumber", addressComponent.streetNumber);
+
+            String briefAddress = result.getAddress(); //简要地址信息
+            String businessCircle = result.getBusinessCircle(); //位置所属商圈名称
+            String sematicDescription = result.getSematicDescription(); //获取描述信息
+            List<PoiInfo> poiInfoList = result.getPoiList();
+            WritableArray poiInfos = new WritableNativeArray();
+            if(poiInfoList != null && poiInfoList.size() > 0) {
+                for(int i = 0; i < poiInfoList.size(); i++) {
+                    WritableMap poiInfo = new WritableNativeMap();
+                    poiInfo.putString("name", poiInfoList.get(i).name);
+                    poiInfo.putString("address", poiInfoList.get(i).address);
+                    poiInfo.putString("phoneNum", poiInfoList.get(i).phoneNum);
+                    if(poiInfoList.get(i).type != null) {
+                        poiInfo.putInt("type", poiInfoList.get(i).type.getInt());
+                    }
+                    poiInfo.putBoolean("hasCaterDetails", poiInfoList.get(i).hasCaterDetails);
+                    poiInfos.pushMap(poiInfo);
+                }
+            }
+            params.putString("briefAddress", briefAddress);
+            params.putString("businessCircle", businessCircle);
+            params.putString("sematicDescription", sematicDescription);
+            params.putArray("poiInfos", poiInfos);
+
         }
         sendEvent("onGetReverseGeoCodeResult", params);
     }

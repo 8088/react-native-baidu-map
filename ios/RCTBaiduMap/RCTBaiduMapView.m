@@ -2,8 +2,8 @@
 //  RCTBaiduMap.m
 //  RCTBaiduMap
 //
-//  Created by lovebing on 4/17/2016.
-//  Copyright © 2016 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 #import "RCTBaiduMapView.h"
@@ -91,8 +91,8 @@
 }
 
 -(void)addMarker:(BMKPointAnnotation *)annotation option:(NSDictionary *)option {
-    [self updateMarker:annotation option:option];
     [self addAnnotation:annotation];
+    [self updateMarker:annotation option:option];
 }
 
 -(void)updateMarker:(BMKPointAnnotation *)annotation option:(NSDictionary *)option {

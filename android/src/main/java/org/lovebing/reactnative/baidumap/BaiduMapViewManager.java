@@ -3,10 +3,10 @@ package org.lovebing.reactnative.baidumap;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
@@ -14,7 +14,6 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.model.LatLng;
@@ -31,9 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by lovebing on 12/20/2015.
- */
 public class BaiduMapViewManager extends ViewGroupManager<MapView> {
 
     private static final String REACT_CLASS = "RCTBaiduMapView";
@@ -175,7 +171,7 @@ public class BaiduMapViewManager extends ViewGroupManager<MapView> {
 
         if(mMarkerText == null) {
             mMarkerText = new TextView(mapView.getContext());
-            mMarkerText.setBackgroundResource(R.drawable.popup);
+//            mMarkerText.setBackgroundResource(R.drawable.app_assets_images_);
             mMarkerText.setPadding(32, 32, 32, 32);
         }
         map.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
@@ -186,6 +182,11 @@ public class BaiduMapViewManager extends ViewGroupManager<MapView> {
                 target.putDouble("latitude", mapStatus.target.latitude);
                 target.putDouble("longitude", mapStatus.target.longitude);
                 writableMap.putMap("target", target);
+                WritableMap targetScreen = Arguments.createMap();
+                targetScreen.putString("targetScreenStr", mapStatus.targetScreen.toString());
+                targetScreen.putInt("x", mapStatus.targetScreen.x);
+                targetScreen.putInt("y", mapStatus.targetScreen.y);
+                writableMap.putMap("targetScreen", targetScreen);
                 writableMap.putDouble("zoom", mapStatus.zoom);
                 writableMap.putDouble("overlook", mapStatus.overlook);
                 return writableMap;

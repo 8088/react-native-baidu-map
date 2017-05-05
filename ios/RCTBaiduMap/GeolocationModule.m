@@ -2,8 +2,8 @@
 //  GoelocationModule.m
 //  RCTBaiduMap
 //
-//  Created by lovebing on 2016/10/28.
-//  Copyright © 2016年 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 #import "GeolocationModule.h"
@@ -53,7 +53,6 @@ RCT_EXPORT_METHOD(geocode:(NSString *)city addr:(NSString *)addr) {
 }
 
 RCT_EXPORT_METHOD(reverseGeoCode:(double)lat lng:(double)lng) {
-    
     [self getGeocodesearch].delegate = self;
     CLLocationCoordinate2D baiduCoor = CLLocationCoordinate2DMake(lat, lng);
     
@@ -71,7 +70,6 @@ RCT_EXPORT_METHOD(reverseGeoCode:(double)lat lng:(double)lng) {
 }
 
 RCT_EXPORT_METHOD(reverseGeoCodeGPS:(double)lat lng:(double)lng) {
-    
     [self getGeocodesearch].delegate = self;
     CLLocationCoordinate2D baiduCoor = [self getBaiduCoor:lat lng:lng];
     
@@ -117,22 +115,6 @@ RCT_EXPORT_METHOD(reverseGeoCodeGPS:(double)lat lng:(double)lng) {
     NSMutableDictionary *body = [self getEmptyBody];
     
     if (error == BMK_SEARCH_NO_ERROR) {
-        // 使用离线地图之前，需要先初始化百度地图
-        [[BMKMapView alloc] initWithFrame:CGRectZero];
-        // 离线地图api或去citycode
-        BMKOfflineMap *offlineMap = [[BMKOfflineMap alloc] init];
-        NSArray *cityCodeArr = [offlineMap searchCity:result.addressDetail.city];
-        if (cityCodeArr.count) {
-            BMKOLSearchRecord *searchRecord = cityCodeArr.firstObject;
-            body[@"cityCode"] = @(searchRecord.cityID).stringValue;
-            searchRecord = nil;
-            
-        }
-        cityCodeArr = nil;
-        offlineMap = nil;
-        
-        body[@"latitude"] = [NSString stringWithFormat:@"%f", result.location.latitude];
-        body[@"longitude"] = [NSString stringWithFormat:@"%f", result.location.longitude];
         body[@"address"] = result.address;
         body[@"province"] = result.addressDetail.province;
         body[@"city"] = result.addressDetail.city;

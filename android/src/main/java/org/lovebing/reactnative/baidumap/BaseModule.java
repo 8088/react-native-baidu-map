@@ -7,9 +7,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-/**
- * Created by lovebing on 2016/10/28.
- */
 abstract public class BaseModule extends ReactContextBaseJavaModule {
 
     protected ReactApplicationContext context;

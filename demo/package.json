@@ -1,5 +1,5 @@
 {
-  "name": "rn",
+  "name": "TestBaiduMap",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,16 +7,18 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "15.4.2",
-    "react-native": "0.42.0",
+    "react": "^16.0.0-alpha.6",
+    "react-native": "^0.43.4",
     "react-native-baidu-map": "^0.6.0",
-    "react-native-fs": "2.1.0-rc.1"
+    "react-native-device-info": "^0.10.2",
+    "react-native-orientation": "^1.17.0",
+    "react-native-vector-icons": "^4.1.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "19.0.2",
-    "react-test-renderer": "15.4.2"
+    "react-test-renderer": "16.0.0-alpha.6"
   },
   "jest": {
     "preset": "react-native"

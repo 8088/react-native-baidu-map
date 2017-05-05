@@ -2,8 +2,8 @@
 //  BaseModule.m
 //  RCTBaiduMap
 //
-//  Created by lovebing on 2016/10/28.
-//  Copyright © 2016年 lovebing.org. All rights reserved.
+//  Created by zachary on 2/11/2017.
+//  Copyright © 2017 zachary. All rights reserved.
 //
 
 #import "BaseModule.h"

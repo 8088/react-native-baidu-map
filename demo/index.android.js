@@ -1,27 +1,13 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Sample React Native Test Baidu Map
+ * https://github.com/8088
  * @flow
  */
+import { AppRegistry } from 'react-native';
 
-import React, { Component } from 'react';
+import App from './app/';
 
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight
-} from 'react-native';
+global.__ANDROID__ = true;
+global.__IOS__ = false;
 
-import BaiduMapDemo from './BaiduMapDemo';
-
-class rn extends Component {
-  render() {
-    return (
-      <BaiduMapDemo />
-    );
-  }
-}
-
-AppRegistry.registerComponent('rn', () => rn);
+AppRegistry.registerComponent('TestBaiduMap', () => App);
