@@ -27,6 +27,7 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
             
 - AndroidManifest.xml
 ```
+...
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
@@ -58,14 +59,14 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
 
 
 #### Xcode
-- Project navigator->Libraries->Add Files to 选择 node_modules/react-native-baidu-map/ios/RCTBaiduMap.xcodeproj
-- Project navigator->Build Phases->Link Binary With Libraries 加入 libRCTBaiduMap.a
-- Project navigator->Build Settings->Search Paths， Framework search paths 添加 $(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib (选择recursive)
-- Project navigator->Build Settings->Search Paths， Header search paths 添加 $(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib (选择recursive)
-- Project navigator->Build Settings->Search Paths， Header search paths 添加 $(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap (选择recursive)
-- Project navigator->Build Settings->Search Paths， Library search paths 添加 $(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib (选择recursive)
-- Project navigator->Build Phases->Link Binary With Libraries 添加依赖：node_modules/react-native-baidu-map/ios/lib/BaiduMapAPI下的全部 framework文件和thiridlibs下的全部.a文件；
-以及CoreLocation.framework和QuartzCore.framework、OpenGLES.framework、SystemConfiguration.framework、CoreGraphics.framework、Security.framework、libsqlite3.0.tbd（xcode7以前为 libsqlite3.0.dylib）、CoreTelephony.framework 、libstdc++.6.0.9.tbd（xcode7以前为libstdc++.6.0.9.dylib）、CoreTelephony.framework
+- Project navigator->Libraries->Add Files to 选择 `node_modules/react-native-baidu-map/ios/RCTBaiduMap.xcodeproj`
+- Project navigator->Build Phases->Link Binary With Libraries 加入 `libRCTBaiduMap.a`
+- Project navigator->Build Settings->Search Paths， Framework search paths 添加 `$(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib` (选择recursive)
+- Project navigator->Build Settings->Search Paths， Header search paths 添加 `$(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib` (选择recursive)
+- Project navigator->Build Settings->Search Paths， Header search paths 添加 `$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap` (选择recursive)
+- Project navigator->Build Settings->Search Paths， Library search paths 添加 `$(SRCROOT)/../node_modules/react-native-baidu-map/ios/lib` (选择recursive)
+- Project navigator->Build Phases->Link Binary With Libraries 添加依赖：node_modules/react-native-baidu-map/ios/lib/BaiduMapAPI下的全部 `framework文件` 和thiridlibs下的全部 `.a文件`；
+以及 `CoreLocation.framework` 和 `QuartzCore.framework`、`OpenGLES.framework`、`SystemConfiguration.framework`、`CoreGraphics.framework`、`Security.framework`、`libsqlite3.0.tbd（xcode7以前为 libsqlite3.0.dylib）`、`CoreTelephony.framework` 、`libstdc++.6.0.9.tbd（xcode7以前为libstdc++.6.0.9.dylib）`、`CoreTelephony.framework`
 - 工程右键添加"Add Files to '工程' `node_modules/react-native-baidu-map/ios/lib/BaiduMapAPI/BaiduMapAPI_Map.framework/Resources/mapapi.bundle`
 
 - [其它一些注意事项可参考百度地图LBS文档](http://lbsyun.baidu.com/index.php?title=iossdk/guide/buildproject)
@@ -80,9 +81,21 @@ project(':react-native-baidu-map').projectDir = new File(settingsDir, '../node_m
     }
   
 ### Usage 使用方法
-    见demo
-    
-    import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map'
+See [demo/app/index.js](https://github.com/8088/react-native-baidu-map/blob/master/demo/app/index.js) for a more detailed example. See the [Wiki](https://github.com/8088/react-native-baidu-map/wiki) usage tips.
+```
+import { MapView, MapTypes, MapModule, Geolocation, PoiSearch } from 'react-native-baidu-map'
+...
+<MapView
+    ref={ map => this.map = map }
+    mapType={MapTypes.NORMAL}
+    zoom={zoom}
+    center={center}
+    marker={marker}
+    style={styles.map}
+    onMapStatusChange={this._onMapStatusChange}/>
+...
+
+```
 
 #### MapView Props 属性
 | Name                    | Type  | Default  | Extra 
